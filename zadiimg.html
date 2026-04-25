@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Para Zadi</title>
+    <style>
+        :root {
+            --bg-color: #0f0f0f;
+            --card-bg: #1a1a1a;
+            --accent-color: #d4a373;
+            --text-color: #e0e0e0;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            font-family: 'Courier New', Courier, monospace;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 600px;
+            width: 100%;
+            text-align: center;
+            background: var(--card-bg);
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            border: 1px solid #333;
+        }
+
+        h1 {
+            color: var(--accent-color);
+            font-size: 1.8rem;
+            margin-bottom: 30px;
+            letter-spacing: 2px;
+        }
+
+        .letter-content {
+            line-height: 1.6;
+            text-align: left;
+            margin-bottom: 30px;
+            display: none;
+            animation: fadeIn 1.5s ease;
+        }
+
+        .options-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        button {
+            background: transparent;
+            border: 1px solid var(--accent-color);
+            color: var(--accent-color);
+            padding: 12px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-family: inherit;
+            text-transform: uppercase;
+            font-size: 0.8rem;
+        }
+
+        button:hover {
+            background: var(--accent-color);
+            color: var(--bg-color);
+        }
+        #memory-photo, #plan-photo {
+            max-width: 100%;
+            height: auto;
+            border-radius: 5px;
+            margin-top: 15px;
+            display: none;
+            animation: fadeIn 1s ease;
+        }
+
+        #special-msg {
+            margin-top: 20px;
+            font-style: italic;
+            color: #888;
+        }
+
+        .song-link {
+            display: inline-block;
+            margin-top: 10px;
+            color: var(--accent-color);
+            text-decoration: none;
+            border: 1px solid var(--accent-color);
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            transition: 0.3s;
+        }
+
+        .song-link:hover {
+            background: var(--accent-color);
+            color: var(--bg-color);
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1 id="title">MENSAJE ENTRANTE...</h1>
+    
+    <div id="main-letter" class="letter-content">
+        <p>A veces me detengo un segundo solo para darme cuenta de lo mucho que ha cambiado mi mundo desde que estás en él. Mi mundo se vacio sentía como si algo faltara, y ahora me doy cuenta de que ese algo eres tú. Te amo mi zadi eres increible; eres una novia increíble y me encanta cada momento que pasamos juntos..</p>
+    </div>
+
+    <div class="options-grid">
+        <button onclick="revealLetter()">Leer Carta</button>
+        <button onclick="showMessage('playlist')">Te Las Dedico</button>
+        <button onclick="showMessage('memory')">Un Recuerdo</button>
+        <button onclick="showMessage('future')">Un Plan</button>
+    </div>
+
+    <div id="message-container">
+        <p id="special-msg"></p>
+        <img id="memory-photo" src="zad .jpg" alt="Nuestro Recuerdo">
+        <img id="plan-photo" src="tuyyo.png" alt="Nuestro Plan"> 
+    </div>
+</div>
+
+<script>
+    function revealLetter() {
+        const letter = document.getElementById('main-letter');
+        const title = document.getElementById('title');
+        const photo = document.getElementById('memory-photo');
+        const planPhoto = document.getElementById('plan-photo');
+        const msg = document.getElementById('special-msg');
+        
+        photo.style.display = 'none';
+        planPhoto.style.display = 'none';
+        msg.innerHTML = "";
+        letter.style.display = 'block';
+        title.innerText = "PARA: ZADI";
+    }
+
+    function showMessage(type) {
+        const display = document.getElementById('special-msg');
+        const photo = document.getElementById('memory-photo');
+        const planPhoto = document.getElementById('plan-photo');
+        const letter = document.getElementById('main-letter');
+        let text = "";
+
+        letter.style.display = 'none';
+
+        photo.style.display = 'none';
+        planPhoto.style.display = 'none';
+
+        switch(type) {
+            case 'playlist':
+                text = `te las dedico amor: <br><br> 
+                        <a href="https://open.spotify.com/playlist/4ttvuhceqtMcqBs9FUS3G6?si=53dd9eb4187e4021" target="_blank" class="song-link">▶ Reproducir playlist</a>`;
+                break;
+            case 'memory':
+                text = "Como amo este dia mi zadi fue increible tenerte en mis brazos";
+                photo.style.display = 'block';
+                break;
+            case 'future':
+                text = "los 2 acostaditos viendo una peli o una serie juntitos.                                                                                                                                   los gatos somos tu y yo";
+		
+                planPhoto.style.display = 'block'; // NUEVO: Mostramos la foto del plan
+                break;
+            default:
+                text = "";
+        }
+        
+        display.style.opacity = 0;
+        setTimeout(() => {
+            display.innerHTML = text;
+            display.style.opacity = 1;
+            display.style.transition = "opacity 0.5s";
+        }, 200);
+    }
+</script>
+
+</body>
+</html>
